@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 from articles.components.scs.parser import *;
-
-import codecs
-import sys
 import os
+import codecs
+from glob import glob
 
 ctr = 0
-nodes = set()
 triples = []
-arc_types = {"=>" : "sc-arc-common", "<=" : "sc-arc-common", "->": "sc-arc-main", "<-": "sc-arc-main", "=": "sc-edge" }
+arc_types = {"=>" : "sc-arc-common",
+             "<=" : "sc-arc-common",
+             "->": "sc-arc-main",
+             "<-": "sc-arc-main",
+             "=": "sc-edge" }
+
 pair_idtfs = {}
 
 def mk_arc_id():
@@ -27,6 +30,10 @@ def sgroup(item):
             s = str(item.subject)
             p = str(item.predicate)
             for i in item.object:
+                
+                if isinstance(i.idtf, (ContentGroup, SetGroup, UrlGroup)):
+                    continue
+                
                 a_id = mk_arc_id()
                 a = "%s/%s" %(a_id, arc_types[p])
                 triples.append((s,a,i.idtf))
@@ -37,15 +44,13 @@ def sgroup(item):
                 if item.attrs is not None:
                     for attr in item.attrs:
                         triples.append((attr, mk_arc("->") ,a_id))
-                    
-    pass
 
 def iwigroup(item):
     i = item.idtf
+    print i
     if isinstance(i, TripleGroup):
         pred = str(i.predicate)
         pair = str(i)
-        
         if pair_idtfs.has_key(pair):
             arc_id = pair_idtfs[pair]
             arc = "%s/%s" % (arc_id, arc_types[pred])
@@ -64,7 +69,6 @@ def isentencelist(subj, sentList):
     for s in sentList.sentences:
         pred = str(s.predicate)
         for obj in s.object:
-            print obj.__class__
             if not isinstance(obj, IdtfWithIntGroup):
                 continue
             
@@ -87,13 +91,13 @@ processors = {SentenceGroup: sgroup,
               ParseResults: presults,
               KeywordGroup: skip}
 
-#os.chdir("../sc-git-repo/scs")
+os.chdir("./test")
 
-fl = [os.path.join(path, f)
- for (path,dir,files) in os.walk(os.getcwd())
- for f in files if f.endswith(".scs")]
-
-for f in fl:
+# process all sc.s files from the current directory and below
+# and write output
+for f in glob("*/*.scs") + glob("*.scs"):
     presults(parse(f))
-
     
+with codecs.open("out.scs1", "w", "utf-8") as output:
+    for t in triples:
+        output.write("%s|%s|%s;;\n" % t)
