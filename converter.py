@@ -4,6 +4,7 @@ import os
 import codecs
 from glob import glob
 
+content_ctr = 0
 ctr = 0
 triples = []
 arc_types = {"=>" : "sc-arc-common",
@@ -24,16 +25,30 @@ def mk_arc(connector):
     ctr += 1
     return "pair%d/%s" % (ctr, arc_types[connector])
 
+def content(c):
+    global content_ctr
+    content_ctr += 1
+    if not os.path.exists("./data"):
+	os.mkdir("./data")
+    with codecs.open("./data/content%d" % content_ctr, "w", "utf-8") as f:
+	f.write(c.value)
+    return "\"file://data/content%d\"" % content_ctr
+
+def url(u):
+    return "\"file://" + u.value + "\""
+
 def sgroup(item):
     if isinstance(item.subject, SimpleIdentifierGroup):
 	if isinstance(item.object, ParseResults):
 	    s = str(item.subject)
 	    p = str(item.predicate)
 	    for i in item.object:
-		if isinstance(i.idtf, (ContentGroup, SetGroup)):
+		if isinstance(i.idtf, SetGroup):
 		    continue
 		elif isinstance(i.idtf, UrlGroup):
-		    o = "\"file://" + str(i.idtf.value) + "\""
+		    o = url(i.idtf)
+		elif isinstance(i.idtf, ContentGroup):
+		    o = content(i.idtf)
 		else:
 		    o = i.idtf
 		
