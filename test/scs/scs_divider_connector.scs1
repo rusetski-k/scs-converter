@@ -1,0 +1,17 @@
+/!* keyword: scs_divider_connector */
+scs_divider_connector => nrel_main_ru_idtf: 
+	[sc.s-коннектор] ;;
+scs_divider_connector => nrel_ru_idtf: 
+	[sc.s-разделитель коннектор] ;;
+scs_divider_connector => nrel_ru_idtf: 
+	[sc.s-разделитель, изображающий sc-коннектор] ;;
+scs_divider_connector => nrel_ru_idtf: 
+	[sc.s-разделитель, соответствующий sc-коннектору] ;;
+scs_divider_connector <= nrel_inclusion:
+	scs_divider;;
+scs_divider_connector <= nrel_subdividing:
+{
+	scs_divider_connector_kernel;
+	scs_divider_connector_extended;
+	scs_divider_connector_special
+};;

@@ -1,0 +1,12 @@
+/!* keyword: scs_divider_modifier */
+scs_divider_modifier => nrel_main_ru_idtf: 
+	[модификатор sc.s-коннектора] ;;
+scs_divider_modifier <= nrel_inclusion:
+	scs_divider;;
+scs_divider_modifier <= nrel_subdividing: 
+{
+	scs_divider_simple_colon;
+	scs_divider_double_colon;
+	scs_divider_simple_plus;
+	scs_divider_double_plus
+};;

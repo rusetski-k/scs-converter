@@ -1,0 +1,14 @@
+/!* keyword: scs_divider_connector_kernel */
+scs_divider_connector_kernel => nrel_main_ru_idtf: 
+	[sc.s-коннектор, соответствующий алфавиту SC-кода] ;;
+scs_divider_connector_kernel => nrel_ru_idtf: 	
+	[sc.s-разделитель, изображающий sc-коннектор, знак которого принадлежит ядру SCg-кода] ;;
+scs_divider_connector_kernel <= nrel_inclusion:
+	scs_divider_connector;;
+scs_divider_connector_kernel <= nrel_subdividing:
+{
+	scs_divider_edge;
+	scs_divider_common_type_arc;
+	scs_divider_accessory_arc;
+	scs_divider_const_pos_stat_accessory_arc
+};;

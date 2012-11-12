@@ -1,0 +1,13 @@
+/!* keyword: scs_divider */ 
+scs_divider => nrel_main_ru_idtf: 
+	[sc.s-разделитель];;
+scs_divider <= nrel_describing_partition:
+	Partition_scs_divider;;
+scs_divider <= nrel_subdividing:
+{
+	scs_divider_connector;
+	scs_divider_incidence;
+	scs_divider_modifier;
+	scs_divider_semicolon;
+	scs_divider_subsentence
+};;

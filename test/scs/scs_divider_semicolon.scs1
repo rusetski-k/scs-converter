@@ -1,0 +1,12 @@
+/!* keyword: scs_divider_semicolon */
+scs_divider_semicolon => nrel_main_ru_idtf: 
+	[*sc.s-разделитель точка с запятой*] ;;
+scs_divider_semicolon => nrel_ru_idtf: 
+	[*sc.s-разделитель, разделяющий составные части в рамках некоторого перечисления*] ;;
+scs_divider_semicolon <= nrel_inclusion:
+	scs_divider;;
+scs_divider_semicolon <= nrel_subdividing: 
+{
+	scs_divider_simple_semicolon;
+	scs_divider_double_semicolon
+};;

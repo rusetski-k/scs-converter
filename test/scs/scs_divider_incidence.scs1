@@ -1,0 +1,21 @@
+/!* keyword: scs_divider_incidence */
+scs_divider_incidence => nrel_main_ru_idtf:
+	[sc.s-разделитель инцидентности] ;;
+scs_divider_incidence => nrel_ru_idtf:
+	[sc.s-разделитель, изображающий связку инцидентности sc-элементов] ;;
+scs_divider_incidence => nrel_ru_idtf:
+	[sc.s-разделитель, соответствующий связке инцидентности] ;;
+scs_divider_incidence <= nrel_inclusion:
+	scs_divider;;
+scs_divider_incidence <= nrel_representation_scs_editor:
+	[|];;
+scs_divider_incidence <= nrel_representation_standart_editor:
+	[|];;
+scs_divider_incidence -> nrel_using_example:
+	[*
+		Четырехугк(ТчкА;ТчкВ;ТчкС;ТчкD) | pair1 | Отр(ТчкВ;ТчкС);;<br>
+		включение* | arc2 | pair1;;
+	*]
+	(*
+		= [*#image:/static/images/scs_divider/example_incidence.png*] ;;
+	*);;

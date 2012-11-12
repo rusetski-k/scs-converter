@@ -1,0 +1,19 @@
+/!* keyword: scs_divider_subsentence */
+scs_divider_subsentence => nrel_main_ru_idtf: 
+	[sc.s-ограничитель встроенных предложений] ;;
+scs_divider_subsentence <= nrel_inclusion:
+	scs_divider;;
+scs_divider_subsentence <= nrel_representation_scs_editor:
+{
+	[ (*...*) ]
+};;
+scs_divider_subsentence <= nrel_explanation:
+	[Указывает границы встроенного sc.s-предложения в рамках sc.s-предложения. Если встроенное sc.s-предложение не содержит разделителей точка с запятой, то при записи границы (*...*) могут быть опущены];;
+scs_divider_subsentence -> nrel_using_example:
+	[
+		Треугк(ТчкВ;ТчкС;ТчкD) => сторона*: Отр(ТчкС;ТчкD)(* => граничная точка*: ТчкС; ТчкD *) ;;
+	]
+	(*
+		= [*Треугк(ТчкВ;ТчкС;ТчкD) => сторона*: Отр(ТчкС;ТчкD);; Отр(ТчкС;ТчкD)=> граничная точка*: ТчкС; ТчкD;;*];;
+		= [*#image:/static/images/scs_divider/example_subsentence.png*];;
+	*);;

@@ -1,0 +1,25 @@
+/!* keyword: scs_divider_connector_extended */
+scs_divider_connector_extended => nrel_main_ru_idtf: 
+	[sc.s-коннектор, соответствующий алфавиту SCg-кода] ;;
+scs_divider_connector_extended => nrel_ru_idtf: 
+	[sc.s-разделитель, изображающий sc-коннектор, знак которого принадлежит первому расширению SCg-кода] ;;
+scs_divider_connector_extended <= nrel_inclusion:
+	scs_divider_connector;;
+scs_divider_connector_extended <= nrel_subdividing:
+{
+	scs_divider_const_edge;
+	scs_divider_var_edge;
+	scs_divider_const_arc;
+	scs_divider_var_arc;
+	scs_divider_var_pos_stat_accessory_arc;
+	scs_divider_const_neg_stat_accessory_arc;
+	scs_divider_var_neg_stat_accessory_arc;
+	scs_divider_const_fuz_stat_accessory_arc;
+	scs_divider_var_fuz_stat_accessory_arc;
+	scs_divider_const_pos_nonstat_accessory_arc;
+	scs_divider_var_pos_nonstat_accessory_arc;
+	scs_divider_const_neg_nonstat_accessory_arc;
+	scs_divider_var_neg_nonstat_accessory_arc;
+	scs_divider_const_fuz_nonstat_accessory_arc;
+	scs_divider_var_fuz_nonstat_accessory_arc
+};;
