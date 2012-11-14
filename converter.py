@@ -44,6 +44,18 @@ def sgroup(item):
 	    p = str(item.predicate)
 	    for i in item.object:
 		if isinstance(i.idtf, SetGroup):
+		    for it in i.idtf.items:
+			o = presults(it)
+			a_id = mk_arc_id()
+			a = "%s/%s" %(a_id, arc_types[p])
+			triples.append((s,a,o))
+
+			if isinstance(i.internal, InternalListGroup):
+			    isentencelist(i.idtf, i.internal)
+
+			if item.attrs is not None:
+			    for attr in item.attrs:
+				triples.append((attr, mk_arc("->") ,a_id))
 		    continue
 		elif isinstance(i.idtf, UrlGroup):
 		    o = url(i.idtf)
@@ -51,7 +63,7 @@ def sgroup(item):
 		    o = content(i.idtf)
 		else:
 		    o = i.idtf
-		
+
 		a_id = mk_arc_id()
 		a = "%s/%s" %(a_id, arc_types[p])
 		triples.append((s,a,o))
@@ -67,7 +79,6 @@ def sgroup(item):
 
 def iwigroup(item):
     i = item.idtf
-    print i
     if isinstance(i, TripleGroup):
 	pred = str(i.predicate)
 	pair = str(i)
@@ -80,6 +91,8 @@ def iwigroup(item):
 	    pair_idtfs[str(i)] = arc_id
 	    triples.append((str(id.subject), arc, str(id.object)))
 	return arc_id
+    elif isinstance(i, SimpleIdentifierGroup):
+	return str(i)
 
 def presults(fields):
     for f in fields:
